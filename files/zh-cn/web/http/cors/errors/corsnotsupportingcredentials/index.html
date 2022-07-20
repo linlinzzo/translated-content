@@ -19,8 +19,8 @@ translation_of: Web/HTTP/CORS/Errors/CORSNotSupportingCredentials
 
 <ul>
  <li>如果使用 {{domxref("XMLHttpRequest")}} 发出请求，确保未将 {{domxref("XMLHttpRequest.withCredentials", "withCredentials")}} 设置为 <code>true。</code></li>
- <li>如果使用 <a href="/en-US/docs/Web/API/Server-sent_events">Server-sent events</a>, 确保 {{domxref("EventSource.withCredentials")}} 的值为 <code>false</code> (false 为默认值)。</li>
- <li>如果使用 <a href="/en-US/docs/Web/API/Fetch_API">Fetch API</a>，确保 {{domxref("Request.credentials")}} 的值为 <code>"omit"</code>.</li>
+ <li>如果使用 <a href="/zh-CN/docs/Web/API/Server-sent_events">Server-sent events</a>, 确保 {{domxref("EventSource.withCredentials")}} 的值为 <code>false</code> (false 为默认值)。</li>
+ <li>如果使用 <a href="/zh-CN/docs/Web/API/Fetch_API">Fetch API</a>，确保 {{domxref("Request.credentials")}} 的值为 <code>"omit"</code>.</li>
 </ul>
 
 <p>如果还不成功，则需要修改服务端，可能需要修改 <code>Access-Control-Allow-Origin</code> 的值，来为客户端所能够加载资源的源予以授权。</p>
@@ -28,7 +28,7 @@ translation_of: Web/HTTP/CORS/Errors/CORSNotSupportingCredentials
 <h2 id="另请参见">另请参见</h2>
 
 <ul>
- <li><a href="/en-US/docs/Web/HTTP/CORS/Errors">CORS errors</a></li>
+ <li><a href="/zh-CN/docs/Web/HTTP/CORS/Errors">CORS errors</a></li>
  <li>术语: {{Glossary("CORS")}}</li>
- <li><a href="/en-US/docs/Web/HTTP/CORS">CORS introduction</a></li>
+ <li><a href="/zh-CN/docs/Web/HTTP/CORS">CORS introduction</a></li>
 </ul>
