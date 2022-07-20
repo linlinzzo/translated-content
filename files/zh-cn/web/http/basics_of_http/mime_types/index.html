@@ -94,7 +94,7 @@ application/octet-stream
 <pre class="syntaxbox notranslate">multipart/form-data
 multipart/byteranges</pre>
 
-<p><em>Multipart</em> 类型表示细分领域的文件类型的种类，经常对应不同的 MIME 类型。这是<em>复合</em>文件的一种表现方式。<code>multipart/form-data</code> 可用于联系 <a href="/en-US/docs/Web/Guide/HTML/Forms">HTML Forms</a> 和 {{HTTPMethod("POST")}} 方法，此外 <code>multipart/byteranges</code>使用状态码{{HTTPStatus("206")}} <code>Partial Content</code>来发送整个文件的子集，而 HTTP 对不能处理的复合文件使用特殊的方式：将信息直接传送给浏览器（这时可能会建立一个“另存为”窗口，但是却不知道如何去显示内联文件。）</p>
+<p><em>Multipart</em> 类型表示细分领域的文件类型的种类，经常对应不同的 MIME 类型。这是<em>复合</em>文件的一种表现方式。<code>multipart/form-data</code> 可用于联系 <a href="/zh-CN/docs/Web/Guide/HTML/Forms">HTML Forms</a> 和 {{HTTPMethod("POST")}} 方法，此外 <code>multipart/byteranges</code>使用状态码{{HTTPStatus("206")}} <code>Partial Content</code>来发送整个文件的子集，而 HTTP 对不能处理的复合文件使用特殊的方式：将信息直接传送给浏览器（这时可能会建立一个“另存为”窗口，但是却不知道如何去显示内联文件。）</p>
 
 <h2 id="重要的MIME类型">重要的 MIME 类型</h2>
 
@@ -195,7 +195,7 @@ multipart/byteranges</pre>
 
 <h3 id="音频与视频类型">音频与视频类型</h3>
 
-<p>HTML 并没有明确定义被用于{{HTMLElement("audio")}}和{{HTMLElement("video")}}元素所支持的文件类型，所以在 web 上使用的只有相对较小的一组类型。<a href="/en-US/docs/Web/HTML/Supported_media_formats"> </a>文章 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats">Media formats supported by the HTML audio and video elements</a> 解释了可以被使用的解码器或视频文件格式。</p>
+<p>HTML 并没有明确定义被用于{{HTMLElement("audio")}}和{{HTMLElement("video")}}元素所支持的文件类型，所以在 web 上使用的只有相对较小的一组类型。<a href="/zh-CN/docs/Web/HTML/Supported_media_formats"> </a>文章 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats">Media formats supported by the HTML audio and video elements</a> 解释了可以被使用的解码器或视频文件格式。</p>
 
 <p>在 web 环境最常用的视频文件的格式，是以下这些这些文件类型：</p>
 
@@ -216,7 +216,7 @@ multipart/byteranges</pre>
   </tr>
   <tr>
    <td><code>audio/webm</code></td>
-   <td> WebM 音频文件格式。Vorbis 和 Opus 是其最常用的解码器。 </td>
+   <td>WebM 音频文件格式。Vorbis 和 Opus 是其最常用的解码器。 </td>
   </tr>
   <tr>
    <td><code>video/webm</code></td>
@@ -245,7 +245,7 @@ multipart/byteranges</pre>
 
 <h3 id="multipartform-data">multipart/form-data</h3>
 
-<p><code>multipart/form-data</code> 可用于<a href="/en-US/docs/Web/Guide/HTML/Forms">HTML 表单</a>从浏览器发送信息给服务器。作为多部分文档格式，它由边界线（一个由<code>'--'</code>开始的字符串）划分出的不同部分组成。每一部分有自己的实体，以及自己的 HTTP 请求头，{{HTTPHeader("Content-Disposition")}}和 {{HTTPHeader("Content-Type")}} 用于文件上传领域，最常用的 ({{HTTPHeader("Content-Length")}} 因为边界线作为分隔符而被忽略）。</p>
+<p><code>multipart/form-data</code> 可用于<a href="/zh-CN/docs/Web/Guide/HTML/Forms">HTML 表单</a>从浏览器发送信息给服务器。作为多部分文档格式，它由边界线（一个由<code>'--'</code>开始的字符串）划分出的不同部分组成。每一部分有自己的实体，以及自己的 HTTP 请求头，{{HTTPHeader("Content-Disposition")}}和 {{HTTPHeader("Content-Type")}} 用于文件上传领域，最常用的 ({{HTTPHeader("Content-Length")}} 因为边界线作为分隔符而被忽略）。</p>
 
 <pre class="syntaxbox notranslate">Content-Type: multipart/form-data; boundary=aBoundaryString
 (other headers associated with the multipart document as a whole)
@@ -331,7 +331,7 @@ Content-Range: bytes 300-400/1270
 
 <h2 id="设置正确的MIME类型的重要性">设置正确的 MIME 类型的重要性</h2>
 
-<p>很多 web 服务器使用默认的 <code>application/octet-stream</code> 来发送未知类型。出于一些安全原因，对于这些资源浏览器不允许设置一些自定义默认操作，导致用户必须存储到本地以使用。常见的导致服务器配置错误的文件类型如下所示：</p>
+<p>很多 web 服务器使用默认的 <code>application/octet-stream</code> 来发送未知类型。出于一些安全原因，对于这些资源浏览器不允许设置一些自定义默认操作，导致用户必须存储到本地以使用。常见的导致服务器配置错误的文件类型如下所示：</p>
 
 <ul>
  <li>
@@ -361,9 +361,9 @@ Content-Range: bytes 300-400/1270
 <h2 id="其他">其他</h2>
 
 <ul>
- <li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Configuring_server_MIME_types">Properly configuring server MIME types</a></li>
+ <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Securing_your_site/Configuring_server_MIME_types">Properly configuring server MIME types</a></li>
  <li>
-  <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Supported_media_formats">Media formats supported by the HTML audio and video elements</a></p>
+  <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Supported_media_formats">Media formats supported by the HTML audio and video elements</a></p>
  </li>
  <li>
   <p><a href="https://www.iana.org/assignments/media-types/application/json">https://www.iana.org/assignments/media-types/application/json</a></p>
