@@ -21490,10 +21490,6 @@
     "modified": "2020-10-29T09:53:30.177Z",
     "contributors": ["JNa0"]
   },
-  "Web/HTTP/Headers/Content-Security-Policy/navigate-to": {
-    "modified": "2020-11-05T08:46:21.988Z",
-    "contributors": ["JNa0"]
-  },
   "Web/HTTP/Headers/Content-Security-Policy/object-src": {
     "modified": "2020-10-29T12:50:10.529Z",
     "contributors": ["JNa0"]
@@ -28164,6 +28160,10 @@
   "conflicting/Web/Accessibility/ARIA_64707ba1917a56654679cbe273e2f4ea": {
     "modified": "2019-03-23T23:17:50.755Z",
     "contributors": ["hmore", "Goofy", "Fredchat"]
+  },
+  "conflicting/Web/HTTP/Headers/Content-Security-Policy": {
+    "modified": "2020-11-05T08:46:21.988Z",
+    "contributors": ["JNa0"]
   },
   "conflicting/Web/JavaScript/Inheritance_and_the_prototype_chain": {
     "modified": "2020-07-03T14:11:44.605Z",
