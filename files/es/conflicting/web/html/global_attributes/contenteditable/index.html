@@ -1,80 +1,68 @@
 ---
-title: コンテンツを編集可能にする
-slug: Web/Guide/HTML/Editable_content
+title: Making content editable
+slug: conflicting/Web/HTML/Global_attributes/contenteditable
 tags:
-  - Advanced
-  - Example
-  - Guide
+  - Avanzado
+  - Ejemplo
+  - Entrada de texto
+  - Guía
   - HTML
   - HTML5
-  - Text
+  - Texto
   - Web
-  - contenteditable
-  - text entry
-  - text input
+  - contentediatable
 translation_of: Web/Guide/HTML/Editable_content
+original_slug: Web/Guide/HTML/Editable_content
 ---
-<div class="notecard warning">
-  <h2>警告</h2>
-  <p><a href="https://w3c.github.io/editing/docs/execCommand/"><code>execCommand()</code> 仕様書</a>で警告しているように、この機能は<q>すべてのユーザーエージェントで一貫した、または完全な実装が行われているわけではなく</q>、それに加えて、 <a href="/ja/docs/Web/API/Document/execCommand"><code>Document.execCommand()</code></a> リファレンスページでは非推奨とされています。したがって、このページの内容の多くは、本番コードで使用するには信頼できません。</p>
-</div>
+<p><span class="seoSummary">En HTML, cualquier elemento puede ser editable. Con el uso de algunos manejadores de eventos de JavaScript, puedes transformar tu página web en un completo y rápido editor de texto. Este artículo brinda información sobre esta funcionalidad.</span></p>
 
-<p><span class="seoSummary">HTML では、すべての要素を編集可能状態 (editable) にすることができます。 JavaScript のいくつかのイベントハンドラーと併用することで、ウェブページを多機能でかつ高速に動作するリッチテキストエディターにしてしまうことも可能です。本記事では、この機能に関する情報を提供します。</span></p>
+<h2 id="¿Cómo_funciona">¿Cómo funciona?</h2>
 
-<div class="note">
-<p><strong>注</strong>: Firefox 63 Beta/Dev Edition では、ブラウザー間の互換性を高めるために、一部のリッチテキスト編集機能を既定で無効にしています。具体的には、 {{htmlelement("img")}}, {{htmlelement("table")}} および絶対位置指定要素のオブジェクトのサイズ変更、インラインテーブルを編集して行や列の追加や削除すること、および絶対位置指定要素の移動を可能にするグラバーです。詳しくは {{bug("1449564")}} を参照してください。</p>
-</div>
+<p>Todo lo que debes hacer es definir el atributo {{htmlattrxref("contenteditable")}} en cualquier elemento HTML que quieras hacer editable.</p>
 
-<h2 id="How_does_it_work">どのような挙動を示すか</h2>
-
-<p>編集可能にする個所と密接に関係する要素へ {{htmlattrxref("contenteditable")}} 属性を設定しなければなりません。</p>
-
-<p>ユーザーが内容を編集可能な {{HTMLElement("div")}} 要素を作成する、簡単な記述例を示します。</p>
+<p>Este es un ejemplo simple con el cual puedes crear elementos {{HTMLElement("div")}} cuyo contenido pueda ser editado por el usuario.</p>
 
 <pre class="brush: html">&lt;div contenteditable="true"&gt;
-  このテキストは閲覧者が編集することができます。
+  This text can be edited by the user.
 &lt;/div&gt;</pre>
 
-<p>上記の HTML は以下のようになります:</p>
+<p>Aquí esta el HTML anterion en acción:</p>
 
-<p>{{EmbedLiveSample('How_does_it_work')}}</p>
+<p>{{ EmbedLiveSample('How_does_it_work') }}</p>
 
-<h2 id="Executing_commands">コマンドを実行する</h2>
+<h2 id="Ejecutando_Comandos">Ejecutando Comandos</h2>
 
-<p>HTML 要素の <code>contenteditable</code> 属性を <code>true</code> に設定すると、{{domxref("document.execCommand()")}} メソッドが使用可能になります。これは、編集可能な部分の内容物を操作する <a href="/ja/docs/Web/API/Document/execCommand#commands">コマンド</a> を実行できます。ほとんどのコマンドは文書の選択範囲に作用します (例えば、テキストに太字や斜体などのスタイルを適用する) が、新しい要素を挿入する (リンクを追加するなど) コマンドや行全体に作用する (インデント) コマンドもあります。<code>contentEditable</code> を使用しているときに <code>execCommand()</code> を呼び出すと、現在アクティブな編集可能要素に作用します。</p>
+<p>Cuando un elemento HTML tiene el parametro <code>contenteditable</code> en <code>true</code>, se hace disponible el método {{ domxref("document.execCommand") }}. Esto te permite ejecutar <a href="/en-US/docs/Web/API/document.execCommand#Commands">comandos</a> para manipular el contenido de una region editable. La mayoria de estos comandos afectan a la selección del documento (bold, italics, etc), mientras que otros insertan nuevos elementos (como añadiendo un link) o afectan a una linea entera (indenting). Cuando usas <code>contentEditable</code>, estás llamando a <code>execCommand</code> que afectará al elemento editable activo.</p>
 
-<h2 id="Differences_in_markup_generation">マークアップ生成の違い</h2>
+<h2 id="Differences_in_markup_generation">Differences in markup generation</h2>
 
-<p>さまざまなブラウザーで <code>contenteditable</code> を使用することは、ブラウザーが生成するマークアップの違いのために、長い間苦痛でした。例えば、編集可能な要素内で新しいテキストの行を作成するために Enter/Return を押下したときのようなシンプルな場合でさえ、主要なブラウザー間で扱いが異なっていました (Firefox は {{htmlelement("br")}} 要素を挿入、IE/Opera は {{htmlelement("p")}} を使用、Chrome/Safari は {{htmlelement("div")}} を使用)。</p>
+<p>El uso de <code>contenteditable</code> en diferentes navegadores ha sido laborioso durante mucho tiempo debido a las diferencias en las marcas generadas por los diferentes navegadores. Por ejemplo, incluso algo tan simple como qué pasa cuando pulsas Enter/Return para crear una nueva línea de texto dentro de un elemento editable era manejado de forma diferente por los  navegadores más utilizados (Firefox insertaba {{htmlelement("br")}} elements, IE/Opera usaba {{htmlelement("p")}}, Chrome/Safari usaba {{htmlelement("div")}}).</p>
 
-<p>幸い、最新のブラウザーではこれらが多少統一されています。<a href="/ja/docs/Mozilla/Firefox/Releases/60">Firefox 60</a> では Chrome、最新の Opera、Edge、Safari に合わせて、{{htmlelement("div")}} 要素で行をくくるように更新しました。</p>
+<p>Afortunadamente, en los navegadores modernos las cosas son un poco más consistentes. A partir de <a href="/en-US/docs/Mozilla/Firefox/Releases/55">Firefox 55</a>, Firefox ha sido actualizado para envolver las líneas separadas en elementos {{htmlelement("div")}}, igualando el comportamiento de Chrome, el moderno Opera, Edge, y Safari.</p>
 
-<p>前出の例で試してみてください。</p>
+<p>Pruebalo en el ejemplo de abajo.</p>
 
 <div class="note">
-<p><strong>注記</strong>: Internet Explorer はもはや開発されておらず、<code>&lt;div&gt;</code> ではなく {{htmlelement("p")}} 要素を使用します。</p>
+<p><strong>Note</strong>: Internet Explorer ya no se está desarrollando y usa {{htmlelement("p")}}.</p>
 </div>
 
-<p>別の方法で段落を分割したい場合は、前出のブラウザーはすべて {{domxref("document.execCommand")}} をサポートしていますので、<code>defaultParagraphSeparator</code> コマンドで分割方法を変更できます。例えば、{{htmlelement("p")}} 要素を使用するには以下のようにします:</p>
+<p>Si quieres utilizar un separador de párrafo diferente, todos los navegadores arriba mencionados soportan {{domxref("document.execCommand")}}, el cual provee un  DefaultParagraphSeparator comando que te premite cambiarlo. Por ejemplo, para usar {{htmlelement("p")}} elements:</p>
 
-<pre class="brush: js">document.execCommand("DefaultParagraphSeparator", false, "p");</pre>
+<pre class="language-js"><code class="language-js">document<span class="punctuation token">.</span><span class="function token">execCommand</span><span class="punctuation token">(</span><span class="string token">"DefaultParagraphSeparator"</span><span class="punctuation token">,</span> <span class="keyword token">false</span><span class="punctuation token">,</span> <span class="string token">"p"</span><span class="punctuation token">)</span><span class="punctuation token">;</span></code></pre>
 
-<p>また Firefox 55 より、<code>defaultParagraphSeparator</code> で<em>非標準</em>の引数として <code>br</code> をサポートしています。これは、ブラウザーが Firefox であるかを確認することで古い Firefox をサポートするウェブアプリケーションで、残念ながら新しい Firefox 向けにウェブアプリケーションを修正するための十分な時間がない場合に、<code>designMode</code> または <code>contenteditable</code> のエディターを初期化する際に以下の行を挿入すると、古い Firefox の動作に戻すことができます:</p>
+<h2 id="Seguridad">Seguridad</h2>
 
-<pre class="brush: js">document.execCommand("defaultParagraphSeparator", false, "br")<span class="punctuation token">;</span></pre>
-
-<h2 id="Security">セキュリティ</h2>
-
-<p>セキュリティ上の理由で Firefox は、JavaScript コードがクリップボード関連の機能 (コピーや貼り付けなど) を使用することをデフォルトで許可していません。<code>about:config</code> を使用して以下の設定を行うと、これらを有効化できます:</p>
+<p>Por razones de seguridad, Firefox no permite al código JavaScript utilizar las características relacionadas con el portapapeles (copiar, pegar, etc.) por defecto. Puedes permitirlo estableciendo las preferencias mostradas abajo usando using <code>about:config</code>:</p>
 
 <pre class="code">user_pref("capability.policy.policynames", "allowclipboard");
 user_pref("capability.policy.allowclipboard.sites", "https://www.mozilla.org");
 user_pref("capability.policy.allowclipboard.Clipboard.cutcopy", "allAccess");
 user_pref("capability.policy.allowclipboard.Clipboard.paste", "allAccess");</pre>
 
-<h2 id="Example_A_simple_but_complete_rich_text_editor">例: シンプルであるが完成されたリッチテキストエディター</h2>
+<h2 id="Ejemplo_un_simple_pero_completo_editor_de_texto_enriquecido">Ejemplo: un simple pero completo editor de texto enriquecido</h2>
 
-<pre class="brush: html" style="height: 500px; width: auto; overflow: auto;">&lt;!doctype html&gt;
+<div style="height: 500px; width: auto; overflow: auto;">
+<pre class="brush: html">&lt;!doctype html&gt;
 &lt;html&gt;
 &lt;head&gt;
 &lt;title&gt;Rich Text Editor&lt;/title&gt;
@@ -109,7 +97,6 @@ function setDocMode(bToSource) {
     oPre.contentEditable = true;
     oPre.appendChild(oContent);
     oDoc.appendChild(oPre);
-    document.execCommand("defaultParagraphSeparator", false, "div");
   } else {
     if (document.all) {
       oDoc.innerHTML = oDoc.innerText;
@@ -212,8 +199,8 @@ img.intLink { border: 0; }
 &lt;img class="intLink" title="Numbered list" onclick="formatDoc('insertorderedlist');" src="data:image/gif;base64,R0lGODlhFgAWAMIGAAAAADljwliE35GjuaezxtHa7P///////yH5BAEAAAcALAAAAAAWABYAAAM2eLrc/jDKSespwjoRFvggCBUBoTFBeq6QIAysQnRHaEOzyaZ07Lu9lUBnC0UGQU1K52s6n5oEADs=" /&gt;
 &lt;img class="intLink" title="Dotted list" onclick="formatDoc('insertunorderedlist');" src="data:image/gif;base64,R0lGODlhFgAWAMIGAAAAAB1ChF9vj1iE33mOrqezxv///////yH5BAEAAAcALAAAAAAWABYAAAMyeLrc/jDKSesppNhGRlBAKIZRERBbqm6YtnbfMY7lud64UwiuKnigGQliQuWOyKQykgAAOw==" /&gt;
 &lt;img class="intLink" title="Quote" onclick="formatDoc('formatblock','blockquote');" src="data:image/gif;base64,R0lGODlhFgAWAIQXAC1NqjFRjkBgmT9nqUJnsk9xrFJ7u2R9qmKBt1iGzHmOrm6Sz4OXw3Odz4Cl2ZSnw6KxyqO306K63bG70bTB0rDI3bvI4P///////////////////////////////////yH5BAEKAB8ALAAAAAAWABYAAAVP4CeOZGmeaKqubEs2CekkErvEI1zZuOgYFlakECEZFi0GgTGKEBATFmJAVXweVOoKEQgABB9IQDCmrLpjETrQQlhHjINrTq/b7/i8fp8PAQA7" /&gt;
-&lt;img class="intLink" title="Delete indentation" onclick="formatDoc('outdent');" src="data:image/gif;base64,R0lGODlhFgAWAMIHAAAAADljwliE35GjuaezxtDV3NHa7P///yH5BAEAAAcALAAAAAAWABYAAAM2eLrc/jDKCQG9F2i7u8agQgyK1z2EIBil+TWqEMxhMczsYVJ3e4ahk+sFnAgtxSQDqWw6n5cEADs=" /&gt;
-&lt;img class="intLink" title="Add indentation" onclick="formatDoc('indent');" src="data:image/gif;base64,R0lGODlhFgAWAOMIAAAAADljwl9vj1iE35GjuaezxtDV3NHa7P///////////////////////////////yH5BAEAAAgALAAAAAAWABYAAAQ7EMlJq704650B/x8gemMpgugwHJNZXodKsO5oqUOgo5KhBwWESyMQsCRDHu9VOyk5TM9zSpFSr9gsJwIAOw==" /&gt;
+&lt;img class="intLink" title="Add indentation" onclick="formatDoc('outdent');" src="data:image/gif;base64,R0lGODlhFgAWAMIHAAAAADljwliE35GjuaezxtDV3NHa7P///yH5BAEAAAcALAAAAAAWABYAAAM2eLrc/jDKCQG9F2i7u8agQgyK1z2EIBil+TWqEMxhMczsYVJ3e4ahk+sFnAgtxSQDqWw6n5cEADs=" /&gt;
+&lt;img class="intLink" title="Delete indentation" onclick="formatDoc('indent');" src="data:image/gif;base64,R0lGODlhFgAWAOMIAAAAADljwl9vj1iE35GjuaezxtDV3NHa7P///////////////////////////////yH5BAEAAAgALAAAAAAWABYAAAQ7EMlJq704650B/x8gemMpgugwHJNZXodKsO5oqUOgo5KhBwWESyMQsCRDHu9VOyk5TM9zSpFSr9gsJwIAOw==" /&gt;
 &lt;img class="intLink" title="Hyperlink" onclick="var sLnk=prompt('Write the URL here','http:\/\/');if(sLnk&amp;&amp;sLnk!=''&amp;&amp;sLnk!='http://'){formatDoc('createlink',sLnk)}" src="data:image/gif;base64,R0lGODlhFgAWAOMKAB1ChDRLY19vj3mOrpGjuaezxrCztb/I19Ha7Pv8/f///////////////////////yH5BAEKAA8ALAAAAAAWABYAAARY8MlJq7046827/2BYIQVhHg9pEgVGIklyDEUBy/RlE4FQF4dCj2AQXAiJQDCWQCAEBwIioEMQBgSAFhDAGghGi9XgHAhMNoSZgJkJei33UESv2+/4vD4TAQA7" /&gt;
 &lt;img class="intLink" title="Cut" onclick="formatDoc('cut');" src="data:image/gif;base64,R0lGODlhFgAWAIQSAB1ChBFNsRJTySJYwjljwkxwl19vj1dusYODhl6MnHmOrpqbmpGjuaezxrCztcDCxL/I18rL1P///////////////////////////////////////////////////////yH5BAEAAB8ALAAAAAAWABYAAAVu4CeOZGmeaKqubDs6TNnEbGNApNG0kbGMi5trwcA9GArXh+FAfBAw5UexUDAQESkRsfhJPwaH4YsEGAAJGisRGAQY7UCC9ZAXBB+74LGCRxIEHwAHdWooDgGJcwpxDisQBQRjIgkDCVlfmZqbmiEAOw==" /&gt;
 &lt;img class="intLink" title="Copy" onclick="formatDoc('copy');" src="data:image/gif;base64,R0lGODlhFgAWAIQcAB1ChBFNsTRLYyJYwjljwl9vj1iE31iGzF6MnHWX9HOdz5GjuYCl2YKl8ZOt4qezxqK63aK/9KPD+7DI3b/I17LM/MrL1MLY9NHa7OPs++bx/Pv8/f///////////////yH5BAEAAB8ALAAAAAAWABYAAAWG4CeOZGmeaKqubOum1SQ/kPVOW749BeVSus2CgrCxHptLBbOQxCSNCCaF1GUqwQbBd0JGJAyGJJiobE+LnCaDcXAaEoxhQACgNw0FQx9kP+wmaRgYFBQNeAoGihCAJQsCkJAKOhgXEw8BLQYciooHf5o7EA+kC40qBKkAAAGrpy+wsbKzIiEAOw==" /&gt;
@@ -226,12 +213,15 @@ img.intLink { border: 0; }
 &lt;/body&gt;
 &lt;/html&gt;
 </pre>
+</div>
 
-<h2 id="See_also">関連情報</h2>
+<div class="note"><strong>Nota:</strong> si quieres ver cómo estandarizar la creación y la inserción de tu editor en tu página, puedes ver nuestro <a class="internal" href="/@api/deki/files/6243/=rich-text-editor.zip" title="rich-text-editor.zip">más completo ejemplo de editor de texto enriquecido</a>.</div>
+
+<h2 id="Véase_también">Véase también</h2>
 
 <ul>
  <li>{{domxref("HTMLElement.contentEditable")}}</li>
- <li>{{htmlattrxref("contenteditable")}} グローバル属性</li>
- <li><a href="/ja/docs/Mozilla/Projects/Midas">Midas</a> (スクリプトで操作可能なテキストエディターコンポーネント)</li>
- <li>{{cssxref("caret-color")}} (テキスト挿入キャレットの色を設定できます)</li>
+ <li>El atributo global {{htmlattrxref("contenteditable")}} </li>
+ <li><a href="/en-US/docs/Mozilla/Projects/Midas">Midas</a> (el componente de editor de texto programable)</li>
+ <li>Browser Support <a href="http://caniuse.com/#feat=contenteditable"> http://caniuse.com/#feat=contenteditable</a></li>
 </ul>
